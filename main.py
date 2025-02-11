@@ -16,8 +16,8 @@ sales = pd.read_csv("data/SalesFINAL12312016.csv")
 
 
 # Data Cleaning and Feature Engineering
-sales['SalesDate'] = pd.to_datetime(sales['SalesDate'])
-purchases['InvoiceDate'] = pd.to_datetime(purchases['InvoiceDate'])
+sales['SalesDate'] = pd.to_datetime(sales['SalesDate'], errors='coerce')
+purchases['InvoiceDate'] = pd.to_datetime(purchases['InvoiceDate'], errors='coerce')
 
 # Handle missing values
 sales.fillna(0, inplace=True)
