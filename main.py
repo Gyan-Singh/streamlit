@@ -8,7 +8,7 @@ import plotly.express as px
 # Load datasets
 purchase_prices = pd.read_csv("data/2017PurchasePricesDec.csv")
 # beginning_inventory = pd.read_csv("data/BegInvFINAL12312016.csv")
-# ending_inventory = pd.read_csv("data/EndInvFINAL12312016.csv")
+ending_inventory = pd.read_csv("data/EndInvFINAL12312016.csv")
 invoice_purchases = pd.read_csv("data/InvoicePurchases12312016.csv")
 purchases = pd.read_csv("data/PurchasesFINAL12312016.csv")
 sales = pd.read_csv("data/SalesFINAL12312016.csv")
