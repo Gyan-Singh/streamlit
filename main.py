@@ -17,15 +17,20 @@ sales = pd.read_csv("data/SalesFINAL12312016.csv")
 
 # Data Cleaning and Feature Engineering
 sales['SalesDate'] = pd.to_datetime(sales['SalesDate'], errors='coerce')
-purchases['InvoiceDate'] = pd.to_datetime(purchases['InvoiceDate'], errors='coerce')
+sales = sales.dropna(subset=['SalesDate'])
 
+# Sort by SalesDate
+sales = sales.sort_values(by='SalesDate')
+
+purchases['InvoiceDate'] = pd.to_datetime(purchases['InvoiceDate'], errors='coerce')
+sales['SalesQuantity'] = pd.to_numeric(sales['SalesQuantity'], errors='coerce')
 # Handle missing values
 sales.fillna(0, inplace=True)
 purchases.fillna(0, inplace=True)
 
 # Model Building / Analysis
 # Demand Forecasting (Simple Moving Average)
-sales_grouped = sales.groupby(['SalesDate'])['SalesQuantity'].sum().rolling(window=30).mean()
+sales_grouped = sales.groupby('SalesDate')['SalesQuantity'].sum().rolling(window=30, min_periods=1).mean()
 
 # Inventory Optimization (EOQ and Reorder Point Calculation)
 lead_time = 14  # assumed lead time in days
